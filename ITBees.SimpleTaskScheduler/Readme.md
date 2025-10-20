@@ -43,6 +43,13 @@ public void ConfigureServices(IServiceCollection services)
 
     public void ConfigureServices(IServiceCollection services)
 	services.AddSingleton<IScheduledTask, TimeRecordAutoApprovalSchedulingService>();
+	services.AddSingleton<IScheduledTask, SecondSchedulingService>();
+	...
 	
+	services.AddScheduler((sender, args) =>
+            {
+                Console.Write(args.Exception.Message);
+                args.SetObserved();
+            });
     ...
 ```
